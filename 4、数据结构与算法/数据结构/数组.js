@@ -50,3 +50,29 @@ var findMaxConsecutiveOnes = function(nums) {
     }
     return temp
 }//感觉好挫。。。。。
+//1.两数之和
+var twoSum=function (nums,target){
+    var map={}
+    var result=[]
+    for(var i=0;i<nums.length;i++){//一边找一边记录
+        var otherNums=target-nums[i]
+        if(otherNums in map){
+            result.push(i,map[otherNums])
+            return result
+        }
+        map[nums[i]]=i
+    }
+}
+//26. 删除排序数组中的重复项
+var removeDuplicates = function(nums) {
+    if(!nums) return null
+    if(nums.length===1) return nums
+    for (var i=1;i<nums.length;){
+        if(nums[i]===nums[i-1]){
+            nums.splice(i,1)
+        }else{
+            i++
+        }
+    }
+    return nums.length
+};
