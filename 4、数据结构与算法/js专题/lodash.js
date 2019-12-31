@@ -51,3 +51,94 @@ function fill(array,value,start=0,end=array.length){
     }
     return array 
 }
+//findIndex
+//findLastIndex
+//first -> head
+//flatten
+function flatten(array){
+    var newAry=[]
+    for (var i=0;i<array.length;i++){
+        if(Array.isArray(array[i])){
+            newAry.push(...array[i])
+        }else{
+            newAry.push(array[i])
+        }
+    }
+    return newAry
+    //return [].concat(...array)
+}
+//flattenDeep
+function flattenDeep(array){
+    var newAry=[]
+    for (var i=0;i<array.length;i++){
+        if(Array.isArray(array[i])){
+            newAry.push(...flattenDeep(array[i]))
+        }else{
+            newAry.push(array[i])
+        }
+    }
+    return newAry
+}
+//flattenDepth
+function flattenDepth(array,depth=1){
+    var newAry=[]
+    if(depth===0){
+        return array.slice()
+    }
+    for (var i=0;i<array.length;i++){
+        if(Array.isArray(array[i])){
+            newAry.push(...flattenDepth(array[i],--depth))
+        }else{
+            newAry.push(array[i])
+        }
+    }
+    return newAry
+}
+//fromPairs
+//head
+//indexOf
+//initial
+//intersection
+//intersectionBy
+//intersectionWith
+//join
+//last
+//lastIndexOf
+//nth
+//pull
+//pullAll
+//pullAllBy
+//pullAllWith
+//pullAt
+//remove
+//reverse
+//slice
+//sortedIndex
+//sortedIndexBy
+//sortedIndexOf
+//sortedLastIndex
+//sortedLastIndexBy
+//sortedLastIndexOf
+//sortedUniq
+//sortedUniqBy
+//tail
+//take
+//takeRight
+//takeRightWhile
+//takeWhile
+//union
+//unionBy
+//unionWith
+//uniq
+//uniqBy
+//uniqWith
+//unzip
+//unzipWith
+//without
+//xor
+//xorBy
+//xorWith
+//zip
+//zipObject
+//zipObjectDeep
+//zipWith
