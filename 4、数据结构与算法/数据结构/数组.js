@@ -76,3 +76,60 @@ var removeDuplicates = function(nums) {
     }
     return nums.length
 };
+
+//15. 三数之和
+var threeSum = function(nums) {
+    nums.sort(function(a,b){//从小到大排序
+        return a-b
+    })
+    var result=[]
+    if (nums[0] <= 0 && nums[nums.length - 1] >= 0) {//确保数组中有正数与负数
+        for(var i=0;i<nums.length-2;){
+            var left=i+1
+            var right=nums.length-1//设置双指针
+            while(left<right){
+                if(nums[i]*nums[right]>0) break//三数不同号，立即打断
+                if(nums[i]+nums[left]+nums[right]===0){
+                    result.push([nums[i],nums[left],nums[right]])
+                }
+                if(nums[i]+nums[left]+nums[right]<=0){//此处等号不能省略，而且不能使用else if
+                    while(nums[left]===nums[++left]){}//跳过重复值
+                }else{
+                    while(nums[right]===nums[--right]){}
+                }
+
+            }
+            while(nums[i]===nums[++i]){}
+        }
+    }
+    return result
+};
+
+//66 加一
+
+var plusOne = function(digits) {
+    
+    for(var i=digits.length-1;i>=0;i--){
+        digits[i]++
+        digits[i]%=10//一位数%上10仍等于本身
+        if(digits[i]!=0){
+            return digits
+        }
+    }
+    digits.unshift(1)
+    return digits
+};
+
+//283 移动0
+var moveZeroes = function(nums) {
+    var count=0
+    for(var i=0;i<nums.length;i++){
+        if(nums[i]!=0){
+            nums[count]=nums[i]
+            count++
+        }
+    }
+    nums.fill(0,count)
+    
+    return nums
+}
