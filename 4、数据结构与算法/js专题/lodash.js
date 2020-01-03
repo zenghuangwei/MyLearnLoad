@@ -52,6 +52,9 @@ function fill(array,value,start=0,end=array.length){
     return array 
 }
 //findIndex
+function findIndex(array,predicate=identity,fromIndex=0){
+    for (var i=0;i> )
+}
 //findLastIndex
 //first -> head
 //flatten
@@ -142,3 +145,52 @@ function flattenDepth(array,depth=1){
 //zipObject
 //zipObjectDeep
 //zipWith
+//-----------------------------------------------
+//-----------------------------------------------
+//-----------------------------------------------
+//-----------------------------------------------
+//--------------------------------------------------
+//-----------------------------------------------
+//lodash中的predicate函数模式。
+function identity(value){
+    return value
+}
+
+function iteratee(func=identity){
+    var type=typeof func
+    if(type==="string"){//如果是字符串就调用property函数
+        return property(func)
+    }else if(type==="function"){//如果是函数就把函数返回
+        return func
+    }else if(Array.isArray(func)){//如果是数组就调用matchesProperty函数
+        return matchesProperty(func[0], func[1])
+    }else{//
+        return matches(func)//如果是数组就调用matches函数
+    }
+}//WHY-----HWO-----WAHT------DO
+function property(name){
+    return function(obj){
+        return obj[name]
+    }
+}
+
+function matches(target){
+    
+    return function(obj){
+        for(var val in target){
+            if(obj[val]!=target[val]){//
+                return false
+            }
+        }
+        return true 
+    }
+}
+function isMatch(object, source){
+    for(var prop in source){
+        if(object[prop]!==source[prop]){//对象比较：两个不同对象，即使内容相同，也会返回false；
+            //而这里是要每一层都进行比较，只有当最里面的那一层也不同时才返回发false
+            if(!isMatch(object[prop],source[prop]))return false
+        }
+    }
+    return true 
+}
