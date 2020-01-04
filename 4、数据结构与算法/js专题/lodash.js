@@ -53,18 +53,29 @@ function fill(array,value,start=0,end=array.length){
 }
 //findIndex
 function findIndex(array,predicate=identity,fromIndex=0){
-    for (var i=0;i> )
+    predicate=iteratee(predicate)
+    for (var i=fromIndex;i<array.length;i++){
+        if(predicate(array[i])) return i 
+    }
+    return -1
 }
 //findLastIndex
+function findLastIndex(array,predicate=identity,fromIndex=array.length-1){
+    predicate=iteratee(predicate)
+    for (var i=fromIndex;i>=0;i--){
+        if(predicate(array[i])) return i 
+    }
+    return -1
+}
 //first -> head
 //flatten
 function flatten(array){
     var newAry=[]
     for (var i=0;i<array.length;i++){
-        if(Array.isArray(array[i])){
+        if(Array.isArray(array[i])){//如果数组的项是一个数组，就用...展开一层再放入数组
             newAry.push(...array[i])
         }else{
-            newAry.push(array[i])
+            newAry.push(array[i])//不是数组直接push就行了
         }
     }
     return newAry
@@ -90,7 +101,7 @@ function flattenDepth(array,depth=1){
     }
     for (var i=0;i<array.length;i++){
         if(Array.isArray(array[i])){
-            newAry.push(...flattenDepth(array[i],--depth))
+            newAry.push(...flattenDepth(array[i],--depth))//--前置返回运算过后的值
         }else{
             newAry.push(array[i])
         }
@@ -98,10 +109,46 @@ function flattenDepth(array,depth=1){
     return newAry
 }
 //fromPairs
+function fromPairs(pairs){//foreach版本
+    var obj={}
+    pairs.forEach(function(item,index){
+        obj[item[0]]=item[1]
+    })
+    return obj
+}
+//reduce版本
+function fromPairs(pairs){
+    return pairs.reduce(function(obj,item){
+        obj[item[0]]=item[1]
+        return obj//必须返回不然obj会变为undefined。
+    },{})
+}
 //head
+function head(array){
+    if(!array)return undefined
+    return array[0]
+}
 //indexOf
+function indexOf(array, value, fromIndex=0){
+    for (let i=fromIndex;i<array.length;i++){
+        if(array[i]===value)return i
+    }
+    return -1
+}
 //initial
+function initial(array){
+    array.pop()
+    return array
+}
 //intersection
+function intersection(...array){
+   return arguments[0].reduce((result,item)=>{//这里应为箭头函数，不然arguments[1]将为undefined
+        if(arguments[1].indexOf(item) !== -1){
+            result.push(item)
+        }
+        return result//注意此处return的位置
+    },[])
+}
 //intersectionBy
 //intersectionWith
 //join
