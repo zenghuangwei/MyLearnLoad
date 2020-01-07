@@ -151,9 +151,20 @@ function intersection(...array){
 }
 //intersectionBy
 //intersectionWith
-//join
+//join:将数组每一项以间隔符拼接并以字符串输出。
+function join(array, separator=','){
+   return array.reduce(function(result,item){
+        return result+""+separator+""+item
+   })
+}
+
 //last
+function last(ary){
+    i=ary.length-1
+    return ary[i]
+}
 //lastIndexOf
+
 //nth
 //pull
 //pullAll
