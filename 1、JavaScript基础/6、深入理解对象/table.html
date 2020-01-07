@@ -1,0 +1,58 @@
+<script src="lodash.js"></script>
+<style>
+    .string {
+        color:red
+    }
+    .number ,.boolean{
+        color:blue
+    }
+    .nil {
+        color:grey
+    }
+</style>
+<script>
+
+    function table(ary){//这是一个二维数组
+        //var allkeys=_.uniq(_.flatten(ary.map(it=>_.keys(it))))//获取所有属性，去括号，扁平化
+        //更加直观的做法
+        var allkeys=_(ary).map(it=>_.keys(it)).flatten().uniq().value()//ladash对象
+        var result ="<table border='1'><thead><tr>"
+        result+='<td>index</td>'
+        for (var key of allkeys){
+            result +=`<th>${key}</th>`
+        }
+        result +="</tr></thead>"
+        var i=0
+        result +="<tbody>"
+        for (var item of ary){
+            result+="<tr>"
+            result+=`<td>${i++}</td>`
+            for(var key of allkeys){
+                if(item.hasOwnProperty(key)){
+                        result +=`<td>${formate(item[key])}</td>`
+                }else{
+                    result +=`<td></td>`
+                }
+                
+            }
+            result+="</tr>"
+        }
+        result+='</tbody></ttable>'
+        return result
+    }
+    function formate(val){
+        if(typeof val ==="string"){
+           return `<span class="string">"${val}"</span>`
+        }
+        if(typeof val ==="number"){
+           return `<span class="number">${val}</span>`
+        }
+        if(typeof val ==="boolean"){
+           return `<span class="boolean">${val}</span>`
+        }
+        if(typeof val ==="undefined"||val===null){
+           return `<span class="nil">${val}</span>`
+        }
+    }
+    document.write(table([{a:1,b:'2'},{a:2,b:3},{b:5,a:8,c:99}]))
+</script>
