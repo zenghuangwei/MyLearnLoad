@@ -58,4 +58,11 @@
         }
     }
     cloneNode
+
+    function elt(nodeName,...children){
+
+    }
+    function dom(ary,...inters){
+        
+    }
 ```

@@ -164,17 +164,60 @@ function last(ary){
     return ary[i]
 }
 //lastIndexOf
-
+function lastIndexOf(array, value, fromIndex=array.length-1){
+    for (var i=fromIndex;i>=0;i--){
+        if(value!==value&&array[i]!==array[i]) return i
+        if(array[i]===value){
+            return i
+        }
+    }
+    return -1
+}
 //nth
-//pull
+//pull:将数组中与函数第二个参数相同的数都去掉
+function pull(array, values){
+    var map={}
+    var newAry=[]
+    for (var i=1;i<arguments.length;i++){
+        map[arguments[i]]=1
+    }
+    for (var i=0;i<array.length;i++){
+        if(array[i] in map===false){
+            newAry.push(array[i])
+        }
+    }
+    return newAry
+}
 //pullAll
 //pullAllBy
 //pullAllWith
 //pullAt
 //remove
 //reverse
+function reverse(array){
+    var len=Math.floor((array.length-1)/2)
+    var j=array.length-1
+    for (var i=0;i<=len;i++){
+        var temp=array[i]
+        array[i]=array[j]
+        array[j]=temp
+        j--        
+    }
+    return array
+}
 //slice
-//sortedIndex
+//sortedIndex:将值按顺序插入数组并返回下标
+function sortedIndex(array, value){
+    var newAry = []
+    for (var i=0;i<=array.length-1;i++){
+        if(array[i]>=value){
+            newAry.push(value,array[i])
+            return i
+        }else{
+            newAry.push(array[i])
+        }
+    }
+}
 //sortedIndexBy
 //sortedIndexOf
 //sortedLastIndex
@@ -187,7 +230,17 @@ function last(ary){
 //takeRight
 //takeRightWhile
 //takeWhile
-//union
+//union:合并数组并返回，新数组的每一个值都是唯一的 
+function union(...arrays){
+    var newAry=[].concat(...arrays)
+    var result=[]
+    for(var i=0;i<newAry.length;i++){
+        if(!result.includes(newAry[i])){
+            result.push(newAry[i])
+        }
+    }
+    return result
+}
 //unionBy
 //unionWith
 //uniq
